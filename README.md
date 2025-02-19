@@ -8,7 +8,8 @@ My custom control is a `Border` that has been modified to support a bindable `Fr
             Spacing="25">
 
             <!--Explicit-->
-            <controls:FrameWithId FrameId="{Binding Source={x:Static local:FrameId.BarcodeFrame}}" >                
+            <controls:FrameWithId 
+                FrameId="{Binding Source={x:Static local:FrameId.BarcodeFrame}}" >                
                 <Image 
                     Source="dotnet_bot.png" 
                     HeightRequest="185"  
@@ -23,7 +24,8 @@ My custom control is a `Border` that has been modified to support a bindable `Fr
             </controls:FrameWithId>
                         
             <!--Explicit-->
-            <controls:FrameWithId FrameId="{Binding Source={x:Static local:FrameId.QRCodeFrame}}">
+            <controls:FrameWithId 
+                FrameId="{Binding Source={x:Static local:FrameId.QRCodeFrame}}">
                 <Button Text="Click Me" />
             </controls:FrameWithId>
 
@@ -32,14 +34,18 @@ My custom control is a `Border` that has been modified to support a bindable `Fr
 </ContentPage> 
 ```
 
-The ID is used to bootstrap the app by running a discovery flow in the background. This enumeration might take a second or two, but UI doen't need to wait. The core challenge is reliably detecting whether a property assignment _did not get set_ in the XAML so that the one-time discovery can be run in a default configuration.
+The ID is used to bootstrap the app by running a discovery flow in the background. This enumeration might take a second or two, but the UI strives to keep startup responsive by not awaiting this. The core challenge is reliably detecting whether a property assignment _did not get set_ in the XAML so that the one-time discovery can be run in a default configuration.
 
 ___
 
-**My question:** Is it _safe to assume_ that the constructor and object initializer are _guaranteed_ to execute sequentially _without interruption_ on the UI thread upon which they are being invoked? If you can think of any alternative that makes this more robust, I'm listening. 
+**My Question**
+
+Is it **_safe to assume_** that the constructor and object initializer are **_guaranteed_** to execute sequentially **_without interruption_** on the UI thread upon which they are being invoked? 
 ___
 
-My preferred option is super-simple, it seems to work great, and I believe this represents a worst-case by setting the delay to one tick. I've got at least two other ways I could detect this, but they're less optimal.
+Because _if the answer is "yes"_ then my preferred option is super-simple, it seems to work great, and I believe this represents a worst-case by setting the delay to one tick. I've got at least two other ways I could detect this, but they're less optimal. Of course, if _you_ can think of any alternative that achieves the goal in a more robust manner, I'm listening.
+
+##### Framework Control Self-Discovery based on FrameId
 
 ```
 enum Reserved { DefaultId, }
@@ -91,23 +97,3 @@ class FrameWithId : Border, IDiscoveryMonitor
 **MRE**
 
 A minimal project can be found in this [REPO](https://github.com/IVSoftware/frame-with-id.git). It might make things more clear if one was to run it.
-__
-
-### Alternatives
-
-Feel free to comment or answer WRT these alternatives.
-
-##### Option 1
-
-Does it make it any safer to Dispatch the schedule the discovery at the end of the queue?
-
-`Dispatcher.Dispatch(()=> _ = MockRunDiscovery());`
-
-
-##### Option 2 
-
-One especially undesirable option is to make a lazy singleton getter that guarantees discovery will be run, but it's a can of worms because any UI action that invokes the getter will have to be required to await the lengthy discovery somehow.
-
-
-
-
