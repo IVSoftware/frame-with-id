@@ -81,6 +81,26 @@ class FrameWithId : Border, IDiscoveryMonitor
     .
     .
 ```
+**MRE**
 
+A minimal project can be found in this [REPO](https://github.com/IVSoftware/frame-with-id.git). It might make things more clear if one was to run it.
 __
+
+### Alternatives
+
+Feel free to comment or answer WRT these alternatives.
+
+##### Option 1
+
+Does it make it any safer to Dispatch the schedule the discovery at the end of the queue?
+
+`Dispatcher.Dispatch(()=> _ = MockRunDiscovery());`
+
+
+##### Option 2 
+
+One especially undesirable option is to make a lazy singleton getter that guarantees discovery will be run, but it's a can of worms because any UI action that invokes the getter will have to be required to await the lengthy discovery somehow.
+
+
+
 
