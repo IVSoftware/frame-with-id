@@ -14,7 +14,9 @@ My custom control is a `Border` that has been modified to support a bindable `Fr
             
             <!--Implicit-->
             <controls:FrameWithId >
-                <CollectionView ItemsSource="{Binding Frames}" ItemTemplate="{StaticResource FrameCardTemplate}"/>
+                <CollectionView
+                    ItemsSource="{Binding Frames}" 
+                    ItemTemplate="{StaticResource FrameCardTemplate}"/>
             </controls:FrameWithId>
                         
             <!--Explicit-->
