@@ -63,9 +63,10 @@ class FrameWithId : Border, IDiscoveryMonitor
             .GetAwaiter()
             .OnCompleted(() =>
             {
-                // This ASSUMES that CTOR and Object Initializer cannot
-                // be separated in time under any circumstances. But it
-                // is DEFINITELY APPEARS TO BE RELIABLE HERE!
+                // - This ASSUMES that CTOR and Object Initializer cannot
+                //   be separated in time under any circumstances. 
+                // - This assumption APPEARS TO BE RELIABLE HERE.
+                // - But IS IT REALLY ???
                 var idFtr = FrameId;
                 Debug.WriteLine($"ID Before {idB4} => ID After {idFtr}");
                 if(Equals(idFtr, Reserved.DefaultId))
@@ -75,7 +76,21 @@ class FrameWithId : Border, IDiscoveryMonitor
                 }
             });
     }
+    .
+    .
+    .
+```
+[![debug output][1]][1]
 
+*The output from the `Debug.WriteLine(...)` statements*
+___
+
+##### Bindable `FrameId` property
+
+```
+    .
+    .
+    .
     public static readonly BindableProperty FrameIdProperty =
         BindableProperty.Create(
             propertyName: nameof(FrameWithId.FrameId),
@@ -97,3 +112,6 @@ class FrameWithId : Border, IDiscoveryMonitor
 **MRE**
 
 A minimal project can be found in this [REPO](https://github.com/IVSoftware/frame-with-id.git). It might make things more clear if one was to run it.
+
+
+  [1]: https://i.sstatic.net/gwl02R9I.png
