@@ -9,7 +9,10 @@ My custom control is a `Border` that has been modified to support a bindable `Fr
 
             <!--Explicit-->
             <controls:FrameWithId FrameId="{Binding Source={x:Static local:FrameId.BarcodeFrame}}" >                
-                <Image Source="dotnet_bot.png" HeightRequest="185"  Aspect="AspectFit" />
+                <Image 
+                    Source="dotnet_bot.png" 
+                    HeightRequest="185"  
+                    Aspect="AspectFit" />
             </controls:FrameWithId>
             
             <!--Implicit-->
