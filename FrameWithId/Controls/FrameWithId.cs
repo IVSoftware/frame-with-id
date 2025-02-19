@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace FrameWithId.Controls
+namespace FrameWithIdDemo.Controls
 {
     enum Reserved { DefaultId, }
     interface IDiscoveryMonitor { event EventHandler Discovered; }
@@ -17,8 +17,16 @@ namespace FrameWithId.Controls
                 .GetAwaiter()
                 .OnCompleted(() =>
                 {
+                    // This ASSUMES that CTOR and Object Initializer cannot
+                    // be separated in time under any circumstances. But it
+                    // is DEFINITELY APPEARS TO BE RELIABLE HERE!
                     var idFtr = FrameId;
                     Debug.WriteLine($"ID Before {idB4} => ID After {idFtr}");
+                    if(Equals(idFtr, Reserved.DefaultId))
+                    {
+                        // The ID has 'not' been set so run discovery for default.
+                        _ = MockRunDiscovery();
+                    }
                 });
         }
 
@@ -49,7 +57,7 @@ namespace FrameWithId.Controls
         /// </summary>
         private async Task MockRunDiscovery()
         {
-            var seconds = 5 * _rando.NextDouble();
+            var seconds = 1 + (5 * _rando.NextDouble());
             await Task.Delay(TimeSpan.FromSeconds(seconds));
             Discovered?.Invoke(this, EventArgs.Empty);
         }

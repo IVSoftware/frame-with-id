@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace FrameWithId;
+namespace FrameWithIdDemo;
 
 [Register("AppDelegate")]
 public class AppDelegate : MauiUIApplicationDelegate

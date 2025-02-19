@@ -1,4 +1,4 @@
-﻿namespace FrameWithId
+﻿namespace FrameWithIdDemo
 {
     public partial class App : Application
     {

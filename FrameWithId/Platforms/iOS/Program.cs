@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace FrameWithId;
+namespace FrameWithIdDemo;
 
 public class Program
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace FrameWithId;
+namespace FrameWithIdDemo;
 
 public static class MauiProgram
 {

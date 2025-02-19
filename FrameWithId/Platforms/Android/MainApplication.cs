@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace FrameWithId;
+namespace FrameWithIdDemo;
 
 [Application]
 public class MainApplication : MauiApplication

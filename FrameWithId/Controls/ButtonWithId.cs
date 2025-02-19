@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FrameWithId.Controls
+namespace FrameWithIdDemo.Controls
 {
     class ButtonWithId : Button
     {
