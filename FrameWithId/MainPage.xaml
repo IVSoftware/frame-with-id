@@ -9,6 +9,28 @@
     <ContentPage.BindingContext>
         <local:MainPageViewModel/>
     </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="FrameCardTemplate">
+                <Border 
+                StrokeThickness="2"
+                Stroke="Gray"
+                Padding="10"
+                Margin="10"
+                Background="White"
+                StrokeShape="RoundRectangle 10">
+                    <VerticalStackLayout>
+                        <Label 
+                        Text="{Binding FrameId}" 
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        TextColor="Black"
+                        HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Border>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ScrollView>
         <VerticalStackLayout
             Padding="30,0"
@@ -20,7 +42,7 @@
             
             <!--Implicit-->
             <controls:FrameWithId Discovered="OnFrameDiscovered">
-                <CollectionView ItemsSource="{Binding Frames}" />
+                <CollectionView ItemsSource="{Binding Frames}" ItemTemplate="{StaticResource FrameCardTemplate}"/>
             </controls:FrameWithId>
                         
             <!--Explicit-->
