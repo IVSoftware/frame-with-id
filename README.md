@@ -6,6 +6,7 @@ My custom control is a `Border` that has been modified to support a bindable `Fr
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
+
             <!--Explicit-->
             <controls:FrameWithId FrameId="{Binding Source={x:Static local:FrameId.BarcodeFrame}}" >                
                 <Image Source="dotnet_bot.png" HeightRequest="185"  Aspect="AspectFit" />
@@ -20,6 +21,7 @@ My custom control is a `Border` that has been modified to support a bindable `Fr
             <controls:FrameWithId FrameId="{Binding Source={x:Static local:FrameId.QRCodeFrame}}">
                 <Button Text="Click Me" />
             </controls:FrameWithId>
+
         </VerticalStackLayout>
     </ScrollView>  
 </ContentPage> 
