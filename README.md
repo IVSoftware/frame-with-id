@@ -36,7 +36,7 @@ The ID is used to bootstrap the app by running a discovery flow in the backgroun
 
 ___
 
-**My question:** Is it _safe to assume_ that the constructor and object initializer guaranteed to execute sequentially _without interruption_? 
+**My question:** Is it _safe to assume_ that the constructor and object initializer are _guaranteed_ to execute sequentially _without interruption_ on the UI thread upon which they are being invoked? 
 ___
 
 My preferred option is super-simple, it seems to work great, and I believe this represents a worst-case by setting the delay to one tick. I've got at least two other ways I could detect this, but they're less optimal.
